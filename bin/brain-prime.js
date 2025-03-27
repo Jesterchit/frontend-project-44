@@ -3,17 +3,23 @@ import readlineSync from 'readline-sync';
 
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-const isEven = (num) => num % 2 === 0;
+const isPrime = (num) => {
+  if (num < 2) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+};
 
-const playEvenGame = () => {
+const playPrimeGame = () => {
   console.log('Welcome to the Brain Games!');
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!`);
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
+  console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
 
   for (let i = 0; i < 3; i++) {
     const number = getRandomInt(1, 100);
-    const correctAnswer = isEven(number) ? 'yes' : 'no';
+    const correctAnswer = isPrime(number) ? 'yes' : 'no';
 
     console.log(`Question: ${number}`);
     const userAnswer = readlineSync.question('Your answer: ').toLowerCase();
@@ -28,4 +34,4 @@ const playEvenGame = () => {
   console.log(`Congratulations, ${userName}!`);
 };
 
-playEvenGame();
+playPrimeGame();
